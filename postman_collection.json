@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "HR-Payroll EAI Integration",
+    "_postman_id": "a1b2c3d4-5678-90ef-ghij-klmnopqrstuv",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Employees from HR System",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{HR_Token}}"
+          }
+        ],
+        "url": {
+          "raw": "https://hr.company.com/api/employees",
+          "protocol": "https",
+          "host": ["hr", "company", "com"],
+          "path": ["api", "employees"]
+        }
+      }
+    },
+    {
+      "name": "Send Data to Payroll System",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{Payroll_Token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"month\": \"2025-06\",\n  \"employees\": [\n    {\n      \"empId\": \"EMP123\",\n      \"name\": \"John Doe\",\n      \"basicPay\": 60000,\n      \"workDays\": 20,\n      \"leaveDays\": 2,\n      \"accountInfo\": {\n        \"accNo\": \"123456789\",\n        \"ifscCode\": \"HDFC0001234\"\n      }\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "https://payroll.company.com/api/payroll/run",
+          "protocol": "https",
+          "host": ["payroll", "company", "com"],
+          "path": ["api", "payroll", "run"]
+        }
+      }
+    }
+  ]
+}
